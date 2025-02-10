@@ -5,15 +5,28 @@
 
     You need to implement the function `is_palindrome(s: String) -> bool`.
     The function should return `true` if the string is a palindrome, and `false` otherwise.
-    
+
     Hint: Consider normalizing the string by converting it to lowercase and removing non-alphabetical characters before checking.
 */
-
+use std::collections::VecDeque;
 use std::fmt::{self, Display, Formatter};
 
 pub fn is_palindrome(s: String) -> bool {
-    // TODO: Implement the logic to check if the string is a palindrome
-    false // Placeholder return value
+    let s = s.to_lowercase();
+    let chars: String = s.chars().filter(|c| c.is_alphabetic()).collect();
+    let mut d = VecDeque::new();
+    for c in chars.chars() {
+        d.push_back(c);
+    }
+
+    let mut is_palindrome = true;
+    while d.len() > 1 && is_palindrome {
+        let l = d.pop_front().unwrap();
+        let r = d.pop_back().unwrap();
+        is_palindrome = l == r;
+    }
+
+    is_palindrome // Placeholder return value
 }
 
 #[cfg(test)]
