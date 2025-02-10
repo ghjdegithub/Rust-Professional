@@ -8,12 +8,37 @@
 
     Hint: You can solve this problem using sorting, hash sets, or the two-pointer technique.
 */
-
+use std::cmp::Ordering;
+use std::collections::BTreeSet;
 use std::fmt::{self, Display, Formatter};
 
 pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
     // TODO: Implement the logic to find the intersection of two arrays
-    Vec::new() // Placeholder return value
+    let mut result = BTreeSet::new();
+    let mut nums1 = nums1;
+    nums1.sort();
+    let mut nums2 = nums2;
+    nums2.sort();
+    let mut n1_idx = 0;
+    let mut n2_idx = 0;
+    while n1_idx < nums1.len() && n2_idx < nums2.len() {
+        let n1 = nums1[n1_idx];
+        let n2 = nums2[n2_idx];
+        match n1.cmp(&n2) {
+            Ordering::Less => {
+                n1_idx += 1;
+            }
+            Ordering::Equal => {
+                result.insert(n1);
+                n1_idx += 1;
+            }
+            Ordering::Greater => {
+                n2_idx += 1;
+            }
+        }
+    }
+
+    result.into_iter().collect() // Placeholder return value
 }
 
 #[cfg(test)]
