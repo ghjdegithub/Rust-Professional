@@ -7,7 +7,7 @@ pub fn convert_base(num_str: &str, to_base: u32) -> String {
     let mut result = String::new();
     let mut n = decimal_value;
     while n > 0 {
-        let remainder = n % base;
+        let remainder = n % to_base;
         let digit = match remainder {
             0..=9 => char::from_digit(remainder, 10).unwrap(),
             10..=16 => char::from_digit(remainder, 16).unwrap(),
