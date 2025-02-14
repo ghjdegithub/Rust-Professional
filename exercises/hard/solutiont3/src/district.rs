@@ -7,9 +7,6 @@ pub fn count_provinces() -> String {
     let data = fs::read_to_string("district.json").expect("Unable to read file");
     let graph_input: Value = serde_json::from_str(&data).expect("Unable to parse JSON");
 
-    // 收集每个大区的强连通分量数量
-    let mut components_counts: Vec<String> = Vec::new();
-
     let graph_input: HashMap<String, HashMap<String, Vec<String>>> =
         serde_json::from_value(graph_input).unwrap();
     let scc_counts = calculate_scc_for_regions(graph_input);
