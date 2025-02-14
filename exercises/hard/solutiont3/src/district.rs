@@ -12,7 +12,7 @@ pub fn count_provinces() -> String {
 
     let graph_input: HashMap<String, HashMap<String, Vec<String>>> =
         serde_json::from_value(graph_input).unwrap();
-    let mut scc_counts = calculate_scc_for_regions(graph_input);
+    let scc_counts = calculate_scc_for_regions(graph_input);
 
     for (region, count) in scc_counts.iter() {
         println!(
